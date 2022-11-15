@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqary", "Aqary\Aqary.csproj", "{71288E6D-C6EE-4FEE-BBBB-D234EF0F3EBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aqary", "Aqary\Aqary.csproj", "{71288E6D-C6EE-4FEE-BBBB-D234EF0F3EBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqary.DataAccessLayer", "Aqary.DataAccessLayer\Aqary.DataAccessLayer.csproj", "{9BF9DF3C-1352-4086-ADB4-6A2B4C576D7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqary.Core", "Aqary.Core\Aqary.Core.csproj", "{24C5D710-2101-473A-9410-A78FB7E8A9DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqary.Common", "Aqary.Common\Aqary.Common.csproj", "{4123839E-3CD8-4405-93C2-81926842EB7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqary.Infrastructure", "Aqary.Infrastructure\Aqary.Infrastructure.csproj", "{0CE3EA2C-2E20-4757-A4A1-3894FD97577C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aqary.DTO", "Aqary.DTO\Aqary.DTO.csproj", "{AA66E003-93D6-4AE5-900F-83380149339F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{71288E6D-C6EE-4FEE-BBBB-D234EF0F3EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71288E6D-C6EE-4FEE-BBBB-D234EF0F3EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71288E6D-C6EE-4FEE-BBBB-D234EF0F3EBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF9DF3C-1352-4086-ADB4-6A2B4C576D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF9DF3C-1352-4086-ADB4-6A2B4C576D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF9DF3C-1352-4086-ADB4-6A2B4C576D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF9DF3C-1352-4086-ADB4-6A2B4C576D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C5D710-2101-473A-9410-A78FB7E8A9DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C5D710-2101-473A-9410-A78FB7E8A9DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C5D710-2101-473A-9410-A78FB7E8A9DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C5D710-2101-473A-9410-A78FB7E8A9DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4123839E-3CD8-4405-93C2-81926842EB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4123839E-3CD8-4405-93C2-81926842EB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4123839E-3CD8-4405-93C2-81926842EB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4123839E-3CD8-4405-93C2-81926842EB7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CE3EA2C-2E20-4757-A4A1-3894FD97577C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CE3EA2C-2E20-4757-A4A1-3894FD97577C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CE3EA2C-2E20-4757-A4A1-3894FD97577C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CE3EA2C-2E20-4757-A4A1-3894FD97577C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA66E003-93D6-4AE5-900F-83380149339F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA66E003-93D6-4AE5-900F-83380149339F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA66E003-93D6-4AE5-900F-83380149339F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA66E003-93D6-4AE5-900F-83380149339F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
