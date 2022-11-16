@@ -14,7 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aqary.Common\Aqary.Common.csproj" />
+    <ProjectReference Include="..\Aqary.Core\Aqary.Core.csproj" />
     <ProjectReference Include="..\Aqary.DataAccessLayer\Aqary.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Aqary.DTO\Aqary.DTO.csproj" />
+    <ProjectReference Include="..\Aqary.Infrastructure\Aqary.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

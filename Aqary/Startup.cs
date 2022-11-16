@@ -1,4 +1,8 @@
+using Aqary.Core.Manager;
+using Aqary.Core.Manager.Interface;
+using Aqary.Core.Mapper;
 using Aqary.DataAccessLayer.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,9 +22,14 @@ namespace Aqary
 {
     public class Startup
     {
+        private MapperConfiguration _mapperConfiguration;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _mapperConfiguration = new MapperConfiguration(c=>
+            {
+                c.AddProfile(new Maping());
+            });
         }
 
         public IConfiguration Configuration { get; }
@@ -32,7 +41,10 @@ namespace Aqary
                 options => options.
                 UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
                 ));
+            services.AddSingleton(
+                _mapperConfiguration.CreateMapper());
             services.AddControllers();
+            services.AddScoped<ICategoryManager, CategoryManager>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aqary", Version = "v1" });
