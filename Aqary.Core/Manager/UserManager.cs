@@ -16,7 +16,7 @@ using InvalidOperationException = examBaraaDb.Common.Exceptions.InvalidOperation
 namespace Aqary.Core.Manager
 {
     public class UserManager :
-        BaseManager<ApplicationUser, CreateUserDto, UpdateUserDto, ApplicationUser>
+        BaseManager<ApplicationUser, CreateUserDto, UpdateUserDto, ResponseUserTokenDto>
         , IUserManager
     {
         private readonly AqaryDataBaseContext _context;
@@ -27,16 +27,23 @@ namespace Aqary.Core.Manager
             _mapper = mapper;
             _context = context;
         }
-     
 
- 
-       public override Task<ApplicationUser> CeateAsync(CreateUserDto entity)
+
+
+        public override async Task<ResponseUserTokenDto> CeateAsync(CreateUserDto entity)
         {
             if (_context.ApplicationUsers.Any(a => a.Email.ToLower().Equals(entity.Email.ToLower())))
                 throw new examBaraaDb.Common.Exceptions.InvalidOperationException("User Already Exist");
             if (entity.PasswordHash != entity.ConfirmPassword)
                 throw new examBaraaDb.Common.Exceptions.InvalidOperationException("Wrong Password");
-            return base.CeateAsync(entity);
+            var await base.CeateAsync(entity);
+            throw new InvalidOperationException("Wrong Password");
+            var hashPassword = HashPassword(entity.PasswordHash);
+            entity.PasswordHash = hashPassword;
+            var result = await base.CeateAsync(entity);
+            var response = _mapper.Map<ResponseUserTokenDto>(result);
+            response.Token = $"Bearer {GenerateJWTToken(result)}";
+            return response;
         }
      
         #region private
@@ -51,7 +58,7 @@ namespace Aqary.Core.Manager
         {
             return BCrypt.Net.BCrypt.Verify(password, Hashedpassword);
         }
-        private string GenerateJWTToken(ApplicationUser user)
+        private string GenerateJWTToken(ResponseUserDto user)
         {
 
             var jwtKey = "#ahmad.key*&^vancy!@#$%^&*()_-+=-*/@@{}[]";

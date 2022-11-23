@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Aqary.Core.Manager.Interface
 {
-    public interface IUserManager : IBaseManager<ApplicationUser, CreateUserDto, UpdateUserDto, ApplicationUser>
+    public interface IUserManager : IBaseManager<ApplicationUser, CreateUserDto, UpdateUserDto, ResponseUserTokenDto>
     {
     }
 }

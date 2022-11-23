@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Aqary.DTO.Dtos.User
 {
-    public class CreateUserDto
+    public class ResponseUserDto
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Description { get; set; }
-        public string PasswordHash { get; set; }
-        public string ImageString { get; set; }
-        public string ConfirmPassword { get; set; }
-        public string ImageString { get; set; }
         public string Email { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public DateTime DeletedAt { get; set; }
+
     }
 }
