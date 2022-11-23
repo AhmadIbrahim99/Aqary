@@ -2,6 +2,7 @@
 using Aqary.DataAccessLayer.Models;
 using Aqary.DataAccessLayer.Models.Interface;
 using AutoMapper;
+using examBaraaDb.Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
@@ -37,7 +38,7 @@ namespace Aqary.Core.Repository
         {
             var entity = await _context.Set<T>().SingleOrDefaultAsync(t => t.Id == id)
                 ??
-                throw new Exception("UnDefind");
+            throw new ServiceValidationException("Un Defind");
             entity.DeletedAt = DateTime.Now;
             EntityEntry entityEntry = _context.Entry<T>(
                entity
@@ -69,7 +70,7 @@ namespace Aqary.Core.Repository
             await _context.Set<T>().SingleOrDefaultAsync(
                 t => t.Id == id
                 ) ??
-            throw new Exception("Un Defind")
+            throw new ServiceValidationException("Un Defind")
             );
 
         public virtual async Task<TResponseDTO> GetbyIdAsync(int id, params Expression<Func<T, TResponseDTO>>[] expressions)
@@ -82,7 +83,7 @@ namespace Aqary.Core.Repository
             return _map.Map<TResponseDTO>(
                 await queryable.SingleOrDefaultAsync(
                     t=> t.Id == id) ??
-                    throw new Exception("Un Defind")
+            throw new ServiceValidationException("Un Defind")
                 );
         }
 

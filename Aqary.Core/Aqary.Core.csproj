@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Aqary.Common\Aqary.Common.csproj" />
     <ProjectReference Include="..\Aqary.DataAccessLayer\Aqary.DataAccessLayer.csproj" />
   </ItemGroup>
 
