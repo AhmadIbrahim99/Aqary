@@ -18,10 +18,18 @@ namespace Aqary.Controllers
         {
             _manager = manager;
         }
-
+        [HttpGet]
+        public virtual async Task<IActionResult> Get()
+               => Ok(await _manager.GetAllAsync());
+        [HttpGet("GetById")]
+        public virtual async Task<IActionResult> Get(int id)
+               => Ok(await _manager.GetbyIdAsync(id));
         [HttpPost]
         public virtual async Task<IActionResult> Create(TCreateRequestDTO entity)
                => Ok(await _manager.CeateAsync(entity));
+        [HttpPut]
+        public virtual async Task<IActionResult> Update(int id, TUpdateRequestDTO entity)
+               => Ok(await _manager.UpdateAsync(id, entity));
 
         [HttpDelete]
         public virtual async Task<IActionResult> Delete(int id)
@@ -29,14 +37,5 @@ namespace Aqary.Controllers
             await _manager.DeleteAsync(id);
             return Ok();
         }
-        [HttpGet]
-        public virtual async Task<IActionResult> Get()
-               => Ok(await _manager.GetAllAsync());
-        [HttpGet("GetById")]
-        public virtual async Task<IActionResult> Get(int id)
-               => Ok(await _manager.GetbyIdAsync(id));
-        [HttpPut]
-        public virtual async Task<IActionResult> Update(int id, TUpdateRequestDTO entity)
-               => Ok(await _manager.UpdateAsync(id, entity));
     }
 }
