@@ -11,10 +11,9 @@ namespace Aqary.DTO.Dtos.User
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Description { get; set; }
-        public string PasswordHash { get; set; }
+        public string PasswordHash { get; set; } 
         public string ImageString { get; set; }
         public string ConfirmPassword { get; set; }
-        public string ImageString { get; set; }
         public string Email { get; set; }
     }
 }

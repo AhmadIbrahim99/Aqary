@@ -33,11 +33,9 @@ namespace Aqary.Core.Manager
         public override async Task<ResponseUserTokenDto> CeateAsync(CreateUserDto entity)
         {
             if (_context.ApplicationUsers.Any(a => a.Email.ToLower().Equals(entity.Email.ToLower())))
-                throw new examBaraaDb.Common.Exceptions.InvalidOperationException("User Already Exist");
-            if (entity.PasswordHash != entity.ConfirmPassword)
-                throw new examBaraaDb.Common.Exceptions.InvalidOperationException("Wrong Password");
-            var await base.CeateAsync(entity);
-            throw new InvalidOperationException("Wrong Password");
+                throw new InvalidOperationException("User Already Exist");
+            if (entity.PasswordHash != entity.ConfirmPassword) 
+                throw new InvalidOperationException("Wrong Password");
             var hashPassword = HashPassword(entity.PasswordHash);
             entity.PasswordHash = hashPassword;
             var result = await base.CeateAsync(entity);
