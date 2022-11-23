@@ -47,6 +47,8 @@ namespace Aqary
                 _mapperConfiguration.CreateMapper());
             services.AddControllers();
             services.AddScoped<ICategoryManager, CategoryManager>();
+            services.AddScoped<IUserManager, UserManager>();
+            services.AddScoped<IEstateManager, EstateManager>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aqary", Version = "v1" });
