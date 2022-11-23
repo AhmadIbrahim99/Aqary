@@ -1,6 +1,6 @@
 ﻿using Aqary.Core.Manager.Interface;
 using Aqary.DataAccessLayer.Models;
-using Aqary.DTO.Dtos.Category;
+using Aqary.DTO.Dtos.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +8,9 @@ namespace Aqary.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : BaseController<Category, CreateCategoryDto, UpdateCategoryDto, Category>
+    public class UserController : BaseController<ApplicationUser, CreateUserDto, UpdateUserDto, ApplicationUser>
     {
-        public CategoryController(ICategoryManager manager) 
+        public UserController(IUserManager manager)
             : base(manager)
         {
         }
