@@ -8,6 +8,7 @@ namespace Aqary.DataAccessLayer.Models
 {
     public partial class AqaryDataBaseContext : DbContext
     {
+        public bool IgnoreFilter { get; set; }
         public AqaryDataBaseContext(DbContextOptions<AqaryDataBaseContext> options)
             : base(options)
         {
@@ -142,7 +143,7 @@ namespace Aqary.DataAccessLayer.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Estate__IdUser__628FA481");
             });
-
+            modelBuilder.Entity<ApplicationUser>().HasQueryFilter(x => x.DeletedAt == null || IgnoreFilter);
             OnModelCreatingPartial(modelBuilder);
         }
 

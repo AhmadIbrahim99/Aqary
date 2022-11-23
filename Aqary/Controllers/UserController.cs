@@ -8,7 +8,7 @@ namespace Aqary.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : BaseController<ApplicationUser, CreateUserDto, UpdateUserDto, ApplicationUser>
+    public class UserController : BaseController<ApplicationUser, CreateUserDto, UpdateUserDto, ResponseUserTokenDto>
     {
         public UserController(IUserManager manager)
             : base(manager)

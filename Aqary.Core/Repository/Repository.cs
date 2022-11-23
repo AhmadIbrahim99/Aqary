@@ -89,9 +89,11 @@ namespace Aqary.Core.Repository
 
         public virtual async Task<TResponseDTO> UpdateAsync(int id, TUpdateRequestDTO entity)
         {
+            
             T currentEntity = _map.Map<T>(entity);
             EntityEntry entityEntry = _context.
                                                Entry<T>(currentEntity);
+
             entityEntry.State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return _map.Map<TResponseDTO>(currentEntity);

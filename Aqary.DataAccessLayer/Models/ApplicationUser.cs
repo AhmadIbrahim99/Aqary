@@ -14,10 +14,10 @@ namespace Aqary.DataAccessLayer.Models
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
         public string PasswordHash { get; set; }
         public string Email { get; set; }
-        public string ImageString { get; set; }
+        public string ImageString { get; set; } = string.Empty;
         public virtual ICollection<Estate> Estates { get; set; }
     }
 }
