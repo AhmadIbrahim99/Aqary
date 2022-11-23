@@ -2,6 +2,7 @@
 using Aqary.DataAccessLayer.Models;
 using Aqary.DTO.Dtos.User;
 using AutoMapper;
+using examBaraaDb.Common.Exceptions;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using InvalidOperationException = examBaraaDb.Common.Exceptions.InvalidOperationException;
 
 namespace Aqary.Core.Manager
 {
@@ -25,15 +27,18 @@ namespace Aqary.Core.Manager
             _mapper = mapper;
             _context = context;
         }
-        public override Task<ApplicationUser> CeateAsync(CreateUserDto entity)
+     
+
+ 
+       public override Task<ApplicationUser> CeateAsync(CreateUserDto entity)
         {
             if (_context.ApplicationUsers.Any(a => a.Email.ToLower().Equals(entity.Email.ToLower())))
-                throw new InvalidOperationException("User Already Exist");
+                throw new examBaraaDb.Common.Exceptions.InvalidOperationException("User Already Exist");
             if (entity.PasswordHash != entity.ConfirmPassword)
-                throw new InvalidOperationException("Wrong Password");
+                throw new examBaraaDb.Common.Exceptions.InvalidOperationException("Wrong Password");
             return base.CeateAsync(entity);
         }
-
+     
         #region private
 
         private string HashPassword(string password)

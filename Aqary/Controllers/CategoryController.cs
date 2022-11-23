@@ -14,5 +14,6 @@ namespace Aqary.Controllers
             : base(manager)
         {
         }
+
     }
 }
