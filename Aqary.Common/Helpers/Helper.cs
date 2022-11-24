@@ -19,14 +19,14 @@ namespace examBaraaDb.Common.Helpers
                 {
                     Directory.CreateDirectory(baseFolder);
                 }
-                var base64Array = nbase64img.Split(";base64,");
+                var base64Array = nbase64img.Split(";base64,"); 
                 if (base64Array.Length < 1)
                 {
                     return "";
                 }
-                nbase64img = base64Array[1];
+                nbase64img = base64Array[1]; 
                 var filename = $"{Guid.NewGuid()}{"Logo.png"}".Replace("-", "", StringComparison.InvariantCultureIgnoreCase);
-                if (!string.IsNullOrWhiteSpace(baseFolder))
+                if (!string.IsNullOrWhiteSpace(baseFolder))   
                 { 
                     var url = $@"{baseFolder}\{filename}";
                     filename = $@"{folderPath}\{filename}";
@@ -34,7 +34,6 @@ namespace examBaraaDb.Common.Helpers
                     return url;
                 }
                 return "";
-            
             
             }
             catch (Exception ex)

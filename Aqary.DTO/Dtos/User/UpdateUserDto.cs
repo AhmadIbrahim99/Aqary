@@ -14,7 +14,7 @@ namespace Aqary.DTO.Dtos.User
         public string Description { get; set; } = string.Empty;
         public string PasswordHash { get; set; }
         public string Email { get; set; }
-        public string ImageString { get; set; } = string.Empty;
+        public string ImageString { get; set; } 
         public DateTime CreatedAt { get; set; }
 
     }

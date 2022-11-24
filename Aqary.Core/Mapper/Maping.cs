@@ -10,21 +10,28 @@ namespace Aqary.Core.Mapper
     {
         public Maping()
         {
+
             CreateMap<Category, CreateCategoryDto>()
                 .ReverseMap();
+
             CreateMap<ApplicationUser, CreateUserDto>()
-                .ReverseMap();
+                .ReverseMap().ForMember(x=>x.ImageString,c=>c.Ignore());
+
             CreateMap<ApplicationUser, ResponseUserTokenDto>()
                 .ReverseMap();
+
             CreateMap<ApplicationUser, ResponseUserDto>()
                 .ReverseMap();
+
             CreateMap<ResponseUserDto, ResponseUserTokenDto>()
                 .ReverseMap();
+
             CreateMap<UpdateUserDto, ApplicationUser>()
                 .ReverseMap();
 
             CreateMap<Estate, CreateEstateDto>()
                 .ReverseMap();
+
         }
     }
 }

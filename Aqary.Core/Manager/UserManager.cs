@@ -3,6 +3,7 @@ using Aqary.DataAccessLayer.Models;
 using Aqary.DTO.Dtos.User;
 using AutoMapper;
 using examBaraaDb.Common.Exceptions;
+using examBaraaDb.Common.Helpers;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -32,18 +33,63 @@ namespace Aqary.Core.Manager
 
         public override async Task<ResponseUserTokenDto> CeateAsync(CreateUserDto entity)
         {
-            if (_context.ApplicationUsers.Any(a => a.Email.ToLower().Equals(entity.Email.ToLower())))
+            if (_context.ApplicationUsers.Any(a => a.Email.ToLower().Equals(entity.Email.ToLower()))) 
+            {
                 throw new InvalidOperationException("User Already Exist");
-            if (entity.PasswordHash != entity.ConfirmPassword) 
+            }
+              
+            if (entity.PasswordHash != entity.ConfirmPassword)
+            { 
                 throw new InvalidOperationException("Wrong Password");
+            }
+
+            var url = "";
+
+            if (!string.IsNullOrWhiteSpace(entity.ImageString))
+            {
+                url = Helper.SaveImage(entity.ImageString, "profileImages");
+            }
+          
             var hashPassword = HashPassword(entity.PasswordHash);
             entity.PasswordHash = hashPassword;
+            var imag = "";
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                var baseUrl = "https://localhost:44344/";
+                imag = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
+            }
+            
             var result = await base.CeateAsync(entity);
-            var response = _mapper.Map<ResponseUserTokenDto>(result);
-            response.Token = $"Bearer {GenerateJWTToken(result)}";
-            return response;
+            result.Image = imag;
+
+           // var response = _mapper.Map<ResponseUserTokenDto>(result);
+            result.Token = $"Bearer {GenerateJWTToken(result)}";
+            
+            return result;
         }
-     
+        public override async Task<ResponseUserTokenDto> UpdateAsync(int id, UpdateUserDto entity)
+        {
+            var url = "";
+
+            if (!string.IsNullOrWhiteSpace(entity.ImageString)) 
+            {
+                url = Helper.SaveImage(entity.ImageString, "profileImages");
+            }
+
+            var imag = "";
+
+            if (!string.IsNullOrWhiteSpace(url))
+            {
+                var baseUrl = "https://localhost:44344/";
+                imag = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
+            }
+
+             var result = await base.UpdateAsync(id, entity);
+             result.Image = imag; 
+
+
+            return result;
+        }
         #region private
 
         private string HashPassword(string password)

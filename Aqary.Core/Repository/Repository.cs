@@ -18,14 +18,16 @@ namespace Aqary.Core.Repository
         : IRepository<T, TCreateRequestDTO, TUpdateRequestDTO, TResponseDTO>
         where T : class, IBaseEntity, new()
     {
+
         private readonly AqaryDataBaseContext _context;
         private readonly IMapper _map;
+
         public Repository(AqaryDataBaseContext context, IMapper mapper)
         {
             _context = context;
             _map = mapper;
         }
-
+         
         public virtual async Task<TResponseDTO> CeateAsync(TCreateRequestDTO entity)
         {
             var currentT = _map.Map<T>(entity);
