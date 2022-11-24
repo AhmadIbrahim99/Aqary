@@ -67,6 +67,20 @@ namespace Aqary.Core.Manager
             
             return result;
         }
+        public LoginResponseDto Login(LoginDto dto)
+        { 
+            var user = _context.ApplicationUsers.FirstOrDefault(x => x.Email.ToLower().Equals(dto.Email.ToLower()));
+
+            if (user == null || !VerifyHashPassword(dto.Password, user.PasswordHash))
+            {
+                throw new ServiceValidationException(300, "Invalid Email Or Password Received");
+            }
+            var res = _mapper.Map<LoginResponseDto>(user);
+
+            res.Token = $"Bearer {GenerateJWTToken(user)}";
+
+            return res;
+        }
         public override async Task<ResponseUserTokenDto> UpdateAsync(int id, UpdateUserDto entity)
         {
             var url = "";
@@ -97,8 +111,8 @@ namespace Aqary.Core.Manager
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
             return hashedPassword; 
         }
-
-        private bool VerfyPassword(string password, string Hashedpassword)
+         
+        private bool VerifyHashPassword(string password, string Hashedpassword)
         {
             return BCrypt.Net.BCrypt.Verify(password, Hashedpassword);
         }
@@ -131,7 +145,35 @@ namespace Aqary.Core.Manager
                     expires: DateTime.Now.AddHours(2),
                     signingCredentials: credentials));
         }
+        private string GenerateJWTToken(ApplicationUser user)
+        {
 
+            var jwtKey = "#ahmad.key*&^vancy!@#$%^&*()_-+=-*/@@{}[]";
+            var sercurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+            var credentials = new SigningCredentials(sercurityKey, SecurityAlgorithms.HmacSha256);
+
+            var issure = "test.com";
+            var claims = new[] {
+            new Claim(JwtRegisteredClaimNames.Iss, issure),
+            new Claim(JwtRegisteredClaimNames.Aud, issure),
+            new Claim(JwtRegisteredClaimNames.Sub, $"{user.FirstName} {user.LastName}"),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            new Claim("Email", user.Email),
+            new Claim("Id", user.Id.ToString()),
+            new Claim("DateOfJoining", user.CreatedAt.ToString("yyyy-MM-dd")),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            };
+
+            //var token = new JwtSecurityToken(claims:
+            //    claims, expires: DateTime.Now.AddDays(12),
+            //    signingCredentials:credentials);
+
+            return new JwtSecurityTokenHandler().
+                WriteToken(new JwtSecurityToken(
+                    claims: claims,
+                    expires: DateTime.Now.AddHours(2),
+                    signingCredentials: credentials));
+        }
         #endregion private
 
 
