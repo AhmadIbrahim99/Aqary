@@ -75,7 +75,7 @@ namespace Aqary.Core.Manager
             {
                 url = Helper.SaveImage(entity.ImageString, "profileImages");
             }
-
+             
             var imag = "";
 
             if (!string.IsNullOrWhiteSpace(url))
@@ -95,7 +95,7 @@ namespace Aqary.Core.Manager
         private string HashPassword(string password)
         {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-            return hashedPassword;
+            return hashedPassword; 
         }
 
         private bool VerfyPassword(string password, string Hashedpassword)
