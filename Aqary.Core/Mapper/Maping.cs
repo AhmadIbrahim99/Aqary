@@ -27,7 +27,7 @@ namespace Aqary.Core.Mapper
                 .ReverseMap();
 
             CreateMap<UpdateUserDto, ApplicationUser>()
-                .ReverseMap();
+                .ReverseMap().ForMember(x=>x.ImageString,x=>x.Ignore());
 
             CreateMap<Estate, CreateEstateDto>()
                 .ReverseMap();

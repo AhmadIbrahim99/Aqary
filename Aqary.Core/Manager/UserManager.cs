@@ -75,24 +75,25 @@ namespace Aqary.Core.Manager
             {
                 url = Helper.SaveImage(entity.ImageString, "profileImages");
             }
-             
-            var imag = "";
 
-            if (!string.IsNullOrWhiteSpace(url))
+            var hashPassword = HashPassword(entity.PasswordHash);
+            entity.PasswordHash = hashPassword;
+
+            if (!string.IsNullOrWhiteSpace(url)) 
             {
                 var baseUrl = "https://localhost:44344/";
-                imag = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
+                entity.ImageString = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
             }
 
              var result = await base.UpdateAsync(id, entity);
-             result.Image = imag; 
+             //result.Image = imag; 
 
 
             return result;
         }
         #region private
 
-        private string HashPassword(string password)
+        private string HashPassword(string password) 
         {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
             return hashedPassword; 
