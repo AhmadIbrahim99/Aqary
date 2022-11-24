@@ -86,7 +86,6 @@ namespace Aqary.Core.Manager
             }
 
              var result = await base.UpdateAsync(id, entity);
-             //result.Image = imag; 
 
 
             return result;
