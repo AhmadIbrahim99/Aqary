@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -33,13 +34,13 @@ namespace Aqary.Core.Manager
 
         public override async Task<ResponseUserTokenDto> CeateAsync(CreateUserDto entity)
         {
-            if (_context.ApplicationUsers.Any(a => a.Email.ToLower().Equals(entity.Email.ToLower()))) 
+            if (_context.ApplicationUsers.Any(a => a.Email.ToLower().Equals(entity.Email.ToLower())))
             {
                 throw new InvalidOperationException("User Already Exist");
             }
-              
+
             if (entity.PasswordHash != entity.ConfirmPassword)
-            { 
+            {
                 throw new InvalidOperationException("Wrong Password");
             }
 
@@ -49,26 +50,26 @@ namespace Aqary.Core.Manager
             {
                 url = Helper.SaveImage(entity.ImageString, "profileImages");
             }
-          
+
             var hashPassword = HashPassword(entity.PasswordHash);
             entity.PasswordHash = hashPassword;
             var imag = "";
             if (!string.IsNullOrWhiteSpace(url))
             {
-                var baseUrl = "https://localhost:44344/";
+                var baseUrl = "https://localhost:44344";
                 imag = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
             }
-            
+
             var result = await base.CeateAsync(entity);
             result.Image = imag;
 
-           // var response = _mapper.Map<ResponseUserTokenDto>(result);
+            // var response = _mapper.Map<ResponseUserTokenDto>(result);
             result.Token = $"Bearer {GenerateJWTToken(result)}";
-            
+
             return result;
         }
         public LoginResponseDto Login(LoginDto dto)
-        { 
+        {
             var user = _context.ApplicationUsers.FirstOrDefault(x => x.Email.ToLower().Equals(dto.Email.ToLower()));
 
             if (user == null || !VerifyHashPassword(dto.Password, user.PasswordHash))
@@ -85,7 +86,7 @@ namespace Aqary.Core.Manager
         {
             var url = "";
 
-            if (!string.IsNullOrWhiteSpace(entity.ImageString)) 
+            if (!string.IsNullOrWhiteSpace(entity.ImageString))
             {
                 url = Helper.SaveImage(entity.ImageString, "profileImages");
             }
@@ -93,25 +94,32 @@ namespace Aqary.Core.Manager
             var hashPassword = HashPassword(entity.PasswordHash);
             entity.PasswordHash = hashPassword;
 
-            if (!string.IsNullOrWhiteSpace(url)) 
+            if (!string.IsNullOrWhiteSpace(url))
             {
-                var baseUrl = "https://localhost:44344/";
+                var baseUrl = "https://localhost:44344";
                 entity.ImageString = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
             }
 
-             var result = await base.UpdateAsync(id, entity);
+            var result = await base.UpdateAsync(id, entity);
 
 
             return result;
         }
+        public byte[] Retrive(string fileName)
+        {
+            var folderPath = Directory.GetCurrentDirectory();
+            folderPath = $@"{folderPath}\{fileName}";
+            var byteArray = File.ReadAllBytes(folderPath);
+            return byteArray;
+        }
         #region private
 
-        private string HashPassword(string password) 
+        private string HashPassword(string password)
         {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-            return hashedPassword; 
+            return hashedPassword;
         }
-         
+
         private bool VerifyHashPassword(string password, string Hashedpassword)
         {
             return BCrypt.Net.BCrypt.Verify(password, Hashedpassword);

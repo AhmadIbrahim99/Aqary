@@ -11,5 +11,7 @@ namespace Aqary.Core.Manager.Interface
     public interface IUserManager : IBaseManager<ApplicationUser, CreateUserDto, UpdateUserDto, ResponseUserTokenDto>
     {
         LoginResponseDto Login(LoginDto dto);
+        byte[] Retrive(string fileName);
+        
     }
 }

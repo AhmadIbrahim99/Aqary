@@ -15,12 +15,15 @@ namespace Aqary.Core.Mapper
                 .ReverseMap();
 
             CreateMap<ApplicationUser, CreateUserDto>()
-                .ReverseMap().ForMember(x=>x.ImageString,c=>c.Ignore());
+                .ForMember(x => x.ImageString, c => c.Ignore())
+                .ReverseMap();
 
             CreateMap<ApplicationUser, ResponseUserTokenDto>()
+                .ForMember(x => x.Image, c => c.MapFrom(e => e.ImageString))
                 .ReverseMap();
 
             CreateMap<ApplicationUser, ResponseUserDto>()
+                .ForMember(x=> x.Image, c=>c.MapFrom(e=> e.ImageString))
                 .ReverseMap();
 
             CreateMap<ResponseUserDto, ResponseUserTokenDto>()
@@ -36,7 +39,8 @@ namespace Aqary.Core.Mapper
                 .ReverseMap();
 
             CreateMap<UpdateUserDto, ApplicationUser>()
-                .ReverseMap().ForMember(x=>x.ImageString,x=>x.Ignore());
+                .ForMember(x => x.ImageString, x => x.Ignore())
+                .ReverseMap();
 
             CreateMap<Estate, CreateEstateDto>()
                 .ReverseMap();

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Aqary.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class UserController : BaseController<ApplicationUser, CreateUserDto, UpdateUserDto, ResponseUserTokenDto>
     {
@@ -23,5 +23,9 @@ namespace Aqary.Controllers
             var log = _userManager.Login(dto);
             return Ok(log);
         }
+
+        [HttpGet("fileretrive/profilepic")]
+        public IActionResult Retrive(string fileName) =>
+            File(_userManager.Retrive(fileName), "image/jpeg", fileName);
     }
 }
