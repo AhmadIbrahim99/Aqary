@@ -91,8 +91,13 @@ namespace Aqary.Core.Repository
 
         public virtual async Task<TResponseDTO> UpdateAsync(int id, TUpdateRequestDTO entity)
         {
+            //var resultEntity = await _context.Set<T>().SingleOrDefaultAsync(t => t.Id == id)
+            //    ??
+            //throw new ServiceValidationException("Un Defind");
+            
             
             T currentEntity = _map.Map<T>(entity);
+            //currentEntity.CreatedAt = resultEntity.CreatedAt;
             EntityEntry entityEntry = _context.
                                                Entry<T>(currentEntity);
 

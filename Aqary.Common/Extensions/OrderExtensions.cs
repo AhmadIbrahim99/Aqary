@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Linq.Expressions;
 
-namespace examBaraaDb.Common.Extensions 
+namespace Aqary.Common.Extensions 
 {
     public static class OrderExtensions
     {

@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Aqary.DTO.Dtos.BaseEntity
 {
@@ -14,6 +11,7 @@ namespace Aqary.DTO.Dtos.BaseEntity
         public bool Status { get; set; }
         public double Salary { get; set; }
         public double PriceInDinar { get; set; }
+        public virtual ICollection<IFormFile> Attachments { get; set; }
         public int IdUser { get; set; }
         public int IdCategory { get; set; }
     }

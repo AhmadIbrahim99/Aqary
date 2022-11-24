@@ -144,6 +144,9 @@ namespace Aqary.DataAccessLayer.Models
                     .HasConstraintName("FK__Estate__IdUser__628FA481");
             });
             modelBuilder.Entity<ApplicationUser>().HasQueryFilter(x => x.DeletedAt == null || IgnoreFilter);
+            modelBuilder.Entity<Estate>().HasQueryFilter(x => x.DeletedAt == null || IgnoreFilter);
+            modelBuilder.Entity<Attachment>().HasQueryFilter(x => x.DeletedAt == null || IgnoreFilter);
+            modelBuilder.Entity<Category>().HasQueryFilter(x => x.DeletedAt == null || IgnoreFilter);
             OnModelCreatingPartial(modelBuilder);
         }
 

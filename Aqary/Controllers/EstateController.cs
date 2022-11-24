@@ -10,10 +10,20 @@ namespace Aqary.Controllers
     [ApiController]
     public class EstateController : BaseController<Estate, CreateEstateDto, UpdateEstateDto, Estate>
     {
+        private readonly IEstateManager _manager;
         public EstateController(IEstateManager manager)
             : base(manager)
         {
+            _manager = manager;
         }
+
+        [HttpGet("sorting")]
+        public IActionResult GetAll(int page = 1,
+                                   int pageSize = 10,
+                                   string searchText = "",
+                                   string sortColumn = "",
+                                   string sortDirection = "ascending") =>
+           Ok(_manager.GetAllAsync(page, pageSize, searchText, sortColumn, sortDirection));
     }
 
     

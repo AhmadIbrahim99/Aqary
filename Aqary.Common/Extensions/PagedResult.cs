@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace examBaraaDb.Common.Extensions 
+namespace Aqary.Common.Extensions 
 { 
     public static class PagedResult
     {
