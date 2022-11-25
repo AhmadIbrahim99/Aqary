@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aqary.DTO.Dtos.Category
+namespace Aqary.DTO.Dtos
 {
     public class CreateCategoryDto
     {

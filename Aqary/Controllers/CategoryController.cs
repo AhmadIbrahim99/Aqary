@@ -1,6 +1,6 @@
 ﻿using Aqary.Core.Manager.Interface;
 using Aqary.DataAccessLayer.Models;
-using Aqary.DTO.Dtos.Category;
+using Aqary.DTO.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

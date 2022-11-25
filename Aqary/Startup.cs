@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Aqary
 {
@@ -31,7 +32,7 @@ namespace Aqary
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _mapperConfiguration = new MapperConfiguration(c=>
+            _mapperConfiguration = new MapperConfiguration(c =>
             {
                 c.AddProfile(new Maping());
             });
@@ -46,13 +47,17 @@ namespace Aqary
                 options => options.
                 UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
                 ));
+            services.AddControllers().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling
+            = ReferenceLoopHandling.Ignore);
+
+
+
             services.AddSingleton(
                 _mapperConfiguration.CreateMapper());
-            services.AddControllers();
             services.AddScoped<ICategoryManager, CategoryManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IEstateManager, EstateManager>();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aqar", Version = "v1" });
@@ -103,7 +108,7 @@ namespace Aqary
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                    };
                });
-        
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

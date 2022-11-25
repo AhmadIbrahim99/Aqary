@@ -24,7 +24,11 @@ namespace Aqary.Controllers
                                    string sortColumn = "",
                                    string sortDirection = "ascending") =>
            Ok(_manager.GetAllAsync(page, pageSize, searchText, sortColumn, sortDirection));
+
+        [HttpGet("fileretrive/attachment")]
+        public IActionResult Retrive(string fileName) =>
+               File(_manager.Retrive(fileName), "image/jpeg", fileName);
     }
 
-    
+
 }

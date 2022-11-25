@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
-using Aqary.DTO.Dtos.Category;
 using Aqary.DataAccessLayer.Models;
 using Aqary.DTO.Dtos.User;
 using Aqary.DTO.Dtos.BaseEntity;
+using Aqary.DTO.Dtos;
+using Aqary.Common.Extensions;
 
 namespace Aqary.Core.Mapper
 {
@@ -44,6 +45,11 @@ namespace Aqary.Core.Mapper
 
             CreateMap<Estate, CreateEstateDto>()
                 .ReverseMap();
+
+            CreateMap<EstateDto, Estate>()
+                .ReverseMap();
+
+            CreateMap<PagedResult<EstateDto>, PagedResult<Estate>>().ReverseMap();
 
         }
     }

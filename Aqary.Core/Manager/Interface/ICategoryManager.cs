@@ -1,5 +1,5 @@
 ﻿using Aqary.DataAccessLayer.Models;
-using Aqary.DTO.Dtos.Category;
+using Aqary.DTO.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;

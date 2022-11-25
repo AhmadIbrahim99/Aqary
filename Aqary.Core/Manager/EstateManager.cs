@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using Aqary.Common.Extensions;
 using Aqary.DTO.Dtos.User;
 using Aqary.DTO.Dtos;
+using examBaraaDb.Common.Helpers;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aqary.Core.Manager
 {
@@ -29,10 +32,12 @@ namespace Aqary.Core.Manager
 
         public ResponseEstateDto GetAllAsync(int page = 1, int pageSize = 10, string searchText = "", string sortColumn = "", string sortDirection = "ascending")
         {
-            var queryRes = _context.Estates
+            var queryRes = _context.Estates.
+                Include(x=> x.IdCategoryNavigation)
                .Where(a => string.IsNullOrWhiteSpace(searchText)
                || (a.Name.Contains(searchText) ||
-               a.Description.Contains(searchText)));
+               a.Description.Contains(searchText)||
+               a.IdCategoryNavigation.Name.Contains(searchText)));
 
             if (!string.IsNullOrWhiteSpace(sortColumn) && sortDirection.ToLower().Equals("ascending"))
             {
@@ -55,7 +60,7 @@ namespace Aqary.Core.Manager
                 .ToDictionary(a => a.Id, x => _mapper.Map<ResponseUserDto>(x));
             ResponseEstateDto data = new ResponseEstateDto
             {
-                Estates = _mapper.Map<PagedResult<Estate>>(res),
+                Estates = _mapper.Map<PagedResult<EstateDto>>(res),
                 Users = users
             };
             data.Estates.Sortable.Add("Id", "Id");
@@ -64,17 +69,32 @@ namespace Aqary.Core.Manager
             return data;
         }
 
-        public override Task<Estate> CeateAsync(CreateEstateDto entity)
+        public override async Task<Estate> CeateAsync(CreateEstateDto entity)
         {
-            if(entity.Attachments != null)
+            var result = await base.CeateAsync(entity);
+            if (entity.AttachmentsString != null)
             {
-                foreach(var current in entity.Attachments)
+                foreach(var current in entity.AttachmentsString)
                 {
                     var attachment = new Attachment();
-                    //attachment.IdEstate = entity.id
+                    attachment.IdEstate = result.Id;
+                    var baseUrl = "https://localhost:44344";
+                    var url = Helper.SaveImage(current, "profileImages");
+                    attachment.ImageString = $@"{baseUrl}/api/estate/fileretrive/attachment?filename={url}";
+                    await _context.Attachments.AddAsync(attachment);
+                    await _context.SaveChangesAsync();
+                    result.Attachments.Add(attachment);
                 }
             }
-            return base.CeateAsync(entity);
+            return result;
+        }
+
+        public byte[] Retrive(string fileName)
+        {
+            var folderPath = Directory.GetCurrentDirectory();
+            folderPath = $@"{folderPath}\{fileName}";
+            var byteArray = File.ReadAllBytes(folderPath);
+            return byteArray;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Aqary.DTO.Dtos
 {
     public class ResponseEstateDto
     {
-        public PagedResult<Estate> Estates { get; set; }
+        public PagedResult<EstateDto> Estates { get; set; }
         public Dictionary<int, ResponseUserDto> Users{ get; set; }
     }
 }

@@ -17,5 +17,6 @@ namespace Aqary.Core.Manager.Interface
                          string searchText = "",
                          string sortColumn = "",
                          string sortDirection = "ascending");
+        byte[] Retrive(string fileName);
     }
 }
