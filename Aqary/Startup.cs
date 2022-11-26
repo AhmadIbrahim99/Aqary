@@ -23,6 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Aqary.Factory;
 
 namespace Aqary
 {
@@ -55,9 +56,9 @@ namespace Aqary
 
             services.AddSingleton(
                 _mapperConfiguration.CreateMapper());
-            services.AddScoped<ICategoryManager, CategoryManager>();
-            services.AddScoped<IUserManager, UserManager>();
-            services.AddScoped<IEstateManager, EstateManager>();
+            //services.AddScoped<ICategoryManager, CategoryManager>();
+            //services.AddScoped<IUserManager, UserManager>();
+            //services.AddScoped<IEstateManager, EstateManager>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aqar", Version = "v1" });
@@ -108,6 +109,8 @@ namespace Aqary
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                    };
                });
+            ApiFactory.RegisterDependencies(services);
+
 
         }
 
