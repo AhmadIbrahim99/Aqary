@@ -29,11 +29,11 @@ namespace Aqary.Core.Manager
             _context = context;
             _mapper = mapper;
         }
-
-        public ResponseEstateDto GetAllAsync(int page = 1, int pageSize = 10, string searchText = "", string sortColumn = "", string sortDirection = "ascending")
+        public ResponseEstateDto GetAllFilterAsync(int page = 1, int pageSize = 10, string searchText = "", string sortColumn = "", string sortDirection = "ascending")
         {
             var queryRes = _context.Estates.
-                Include(x=> x.IdCategoryNavigation)
+                Include(x=> x.IdCategoryNavigation).
+                Include(c=> c.Attachments)
                .Where(a => string.IsNullOrWhiteSpace(searchText)
                || (a.Name.Contains(searchText) ||
                a.Description.Contains(searchText)||

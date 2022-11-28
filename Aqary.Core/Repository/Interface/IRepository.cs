@@ -11,9 +11,9 @@ namespace Aqary.Core.Repository.Interface
     public interface IRepository<T, TCreateRequestDTO, TUpdateRequestDTO, TResponseDTO> where T : class, IBaseEntity, new()
     {
         Task<TResponseDTO> GetbyIdAsync(int id);
-        Task<TResponseDTO> GetbyIdAsync(int id, params Expression<Func<T, TResponseDTO>>[] expressions);
+        Task<TResponseDTO> GetbyIdAsync(int id, params Expression<Func<T, object>>[] expressions);
         Task<IEnumerable<TResponseDTO>> GetAllAsync();
-        Task<IEnumerable<TResponseDTO>> GetAllAsync(params Expression<Func<T, TResponseDTO>>[] expressions);
+        Task<IEnumerable<TResponseDTO>> GetAllAsync(params Expression<Func<T, object>>[] expressions);
         Task<TResponseDTO> CeateAsync(TCreateRequestDTO entity);
         Task<TResponseDTO> UpdateAsync(int id, TUpdateRequestDTO entity);
         Task DeleteAsync(int id);

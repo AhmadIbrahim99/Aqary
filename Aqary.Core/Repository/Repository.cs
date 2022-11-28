@@ -54,7 +54,7 @@ namespace Aqary.Core.Repository
            await _context.Set<T>().ToListAsync()
             );
 
-        public virtual async Task<IEnumerable<TResponseDTO>> GetAllAsync(params Expression<Func<T, TResponseDTO>>[] expressions)
+        public virtual async Task<IEnumerable<TResponseDTO>> GetAllAsync(params Expression<Func<T, object>>[] expressions)
         {
             
             IQueryable<T> queryable = _context.Set<T>();
@@ -75,7 +75,7 @@ namespace Aqary.Core.Repository
             throw new ServiceValidationException("Un Defind")
             );
 
-        public virtual async Task<TResponseDTO> GetbyIdAsync(int id, params Expression<Func<T, TResponseDTO>>[] expressions)
+        public virtual async Task<TResponseDTO> GetbyIdAsync(int id, params Expression<Func<T, object>>[] expressions)
         {
             IQueryable<T> queryable = _context.Set<T>();
 

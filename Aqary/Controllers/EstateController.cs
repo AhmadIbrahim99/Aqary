@@ -1,8 +1,8 @@
 ﻿using Aqary.Core.Manager.Interface;
 using Aqary.DataAccessLayer.Models;
 using Aqary.DTO.Dtos.BaseEntity;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Aqary.Controllers
 {
@@ -16,6 +16,12 @@ namespace Aqary.Controllers
         {
             _manager = manager;
         }
+        [HttpGet]
+        public override async Task<IActionResult> Get()
+               => Ok(await _manager.GetAllAsync(x=> x.Attachments));
+        [HttpGet("GetById")]
+        public override async Task<IActionResult> Get(int id)
+               => Ok(await _manager.GetbyIdAsync(id, x => x.Attachments));
 
         [HttpGet("sorting")]
         public IActionResult GetAll(int page = 1,
@@ -23,7 +29,7 @@ namespace Aqary.Controllers
                                    string searchText = "",
                                    string sortColumn = "",
                                    string sortDirection = "ascending") =>
-           Ok(_manager.GetAllAsync(page, pageSize, searchText, sortColumn, sortDirection));
+           Ok(_manager.GetAllFilterAsync(page, pageSize, searchText, sortColumn, sortDirection));
 
         [HttpGet("fileretrive/attachment")]
         public IActionResult Retrive(string fileName) =>

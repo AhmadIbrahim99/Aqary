@@ -12,7 +12,7 @@ namespace Aqary.Core.Manager.Interface
 {
     public interface IEstateManager : IBaseManager<Estate, CreateEstateDto, UpdateEstateDto, Estate>
     {
-        ResponseEstateDto GetAllAsync(int page = 1,
+        ResponseEstateDto GetAllFilterAsync(int page = 1,
                          int pageSize = 10,
                          string searchText = "",
                          string sortColumn = "",
