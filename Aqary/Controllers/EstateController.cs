@@ -1,6 +1,7 @@
 ﻿using Aqary.Core.Manager.Interface;
 using Aqary.DataAccessLayer.Models;
 using Aqary.DTO.Dtos.BaseEntity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -34,6 +35,24 @@ namespace Aqary.Controllers
         [HttpGet("fileretrive/attachment")]
         public IActionResult Retrive(string fileName) =>
                File(_manager.Retrive(fileName), "image/jpeg", fileName);
+
+        [HttpPost, Authorize]
+        public override Task<IActionResult> Create(CreateEstateDto entity)
+        {
+            return base.Create(entity);
+        }
+
+        [HttpPut, Authorize]
+        public override Task<IActionResult> Update(int id, UpdateEstateDto entity)
+        {
+            return base.Update(id, entity);
+        }
+
+        [HttpDelete, Authorize]
+        public override Task<IActionResult> Delete(int id)
+        {
+            return base.Delete(id);
+        }
     }
 
 

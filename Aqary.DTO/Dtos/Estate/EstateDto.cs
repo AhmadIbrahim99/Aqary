@@ -19,7 +19,7 @@ namespace Aqary.DTO.Dtos
         public int IdUser { get; set; }
         public int IdCategory { get; set; }
 
-        public virtual Category IdCategoryNavigation { get; set; }
+        //public virtual Category IdCategoryNavigation { get; set; }
         public virtual ICollection<Attachment> Attachments { get; set; }
     }
 }
