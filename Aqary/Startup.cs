@@ -123,7 +123,7 @@ namespace Aqary
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Aqary v1"));
             }
-
+            app.UseCors(x=> x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
             Log.Logger = new LoggerConfiguration()
                     .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
                     .CreateLogger();
