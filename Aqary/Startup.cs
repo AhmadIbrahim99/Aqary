@@ -109,8 +109,7 @@ namespace Aqary
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                    };
                });
-            ApiFactory.RegisterDependencies(services);
-
+            ApiFactory.RegisterDependencies(services); 
 
         }
 
@@ -130,6 +129,7 @@ namespace Aqary
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseAuthorization();

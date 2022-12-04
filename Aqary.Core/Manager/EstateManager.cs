@@ -80,7 +80,8 @@ namespace Aqary.Core.Manager
                     attachment.IdEstate = result.Id;
                     var baseUrl = "https://localhost:44344";
                     var url = Helper.SaveImage(current, "profileImages");
-                    attachment.ImageString = $@"{baseUrl}/api/estate/fileretrive/attachment?filename={url}";
+                    attachment.ImageString = $@"{baseUrl}/{url}";
+                    //attachment.ImageString = $@"{baseUrl}/api/estate/fileretrive/attachment?filename={url}";
                     await _context.Attachments.AddAsync(attachment);
                     await _context.SaveChangesAsync();
                     result.Attachments.Add(attachment);

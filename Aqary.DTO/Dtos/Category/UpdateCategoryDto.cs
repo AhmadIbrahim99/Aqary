@@ -9,6 +9,6 @@ namespace Aqary.DTO.Dtos
     public class UpdateCategoryDto
     {
         public string Name { get; set; }
-
+        public DateTime CreatedAt { get; set; }
     }
 }

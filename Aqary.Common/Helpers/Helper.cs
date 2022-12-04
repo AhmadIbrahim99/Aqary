@@ -14,7 +14,7 @@ namespace examBaraaDb.Common.Helpers
                 {
                     throw new ServiceValidationException();
                 }
-                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), baseFolder);
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot", baseFolder);
                 if (!Directory.Exists(baseFolder))
                 {
                     Directory.CreateDirectory(baseFolder);
@@ -28,7 +28,7 @@ namespace examBaraaDb.Common.Helpers
                 var filename = $"{Guid.NewGuid()}{"Logo.png"}".Replace("-", "", StringComparison.InvariantCultureIgnoreCase);
                 if (!string.IsNullOrWhiteSpace(baseFolder))   
                 { 
-                    var url = $@"{baseFolder}\{filename}";
+                    var url = $@"{baseFolder}/{filename}";
                     filename = $@"{folderPath}\{filename}";
                     File.WriteAllBytes(filename,Convert.FromBase64String(nbase64img));
                     return url;

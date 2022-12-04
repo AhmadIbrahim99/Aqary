@@ -36,19 +36,19 @@ namespace Aqary.Controllers
         public IActionResult Retrive(string fileName) =>
                File(_manager.Retrive(fileName), "image/jpeg", fileName);
 
-        [HttpPost, Authorize]
+        //[HttpPost, Authorize]
         public override Task<IActionResult> Create(CreateEstateDto entity)
         {
             return base.Create(entity);
         }
 
-        [HttpPut, Authorize]
+        //[HttpPut, Authorize]
         public override Task<IActionResult> Update(int id, UpdateEstateDto entity)
         {
             return base.Update(id, entity);
         }
 
-        [HttpDelete, Authorize]
+        //[HttpDelete, Authorize]
         public override Task<IActionResult> Delete(int id)
         {
             return base.Delete(id);

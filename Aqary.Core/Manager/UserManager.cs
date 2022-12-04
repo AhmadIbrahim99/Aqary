@@ -57,7 +57,8 @@ namespace Aqary.Core.Manager
             if (!string.IsNullOrWhiteSpace(url))
             {
                 var baseUrl = "https://localhost:44344";
-                imag = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
+                imag = $@"{baseUrl}/{url}";
+                //imag = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
             }
 
             var result = await base.CeateAsync(entity);
@@ -97,7 +98,8 @@ namespace Aqary.Core.Manager
             if (!string.IsNullOrWhiteSpace(url))
             {
                 var baseUrl = "https://localhost:44344";
-                entity.ImageString = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
+                entity.ImageString = $@"{baseUrl}/{url}";
+                //entity.ImageString = $@"{baseUrl}/api/v1/user/fileretrive/profilepic?filename={url}";
             }
 
             var result = await base.UpdateAsync(id, entity);

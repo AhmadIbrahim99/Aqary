@@ -26,4 +26,43 @@
     <ProjectReference Include="..\Aqary.Infrastructure\Aqary.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\profileImages\001e25a1119f44428d483b33bee3ce91Logo.png" />
+    <None Include="wwwroot\profileImages\01f2884c98ed40588d51722ae9ebe337Logo.png" />
+    <None Include="wwwroot\profileImages\142d381aa5294b2bba41ebddea9da930Logo.png" />
+    <None Include="wwwroot\profileImages\15b2515ed651426b90bb2bebf30f9db9Logo.png" />
+    <None Include="wwwroot\profileImages\1857782f4f0848349d996d65474295d1Logo.png" />
+    <None Include="wwwroot\profileImages\270db1a74ce94f298874a155d7755c7aLogo.png" />
+    <None Include="wwwroot\profileImages\37ba4c69aaa44b1a97cae842ce51ec51Logo.png" />
+    <None Include="wwwroot\profileImages\3e6d0e9802344195bc9daf292a4883fdLogo.png" />
+    <None Include="wwwroot\profileImages\464f6141206f4a8da3f311378d3facbeLogo.png" />
+    <None Include="wwwroot\profileImages\46818bad3eaa403d87fe704f238564eeLogo.png" />
+    <None Include="wwwroot\profileImages\53385a6c67634415a8ab10a2947e1b83Logo.png" />
+    <None Include="wwwroot\profileImages\57cafc4dd2014bdbad785b19c7640f20Logo.png" />
+    <None Include="wwwroot\profileImages\5f0c9b02d9bc45599230ac291d36f13eLogo.png" />
+    <None Include="wwwroot\profileImages\63bbbd74015b4441b9f6bbb1e578d5daLogo.png" />
+    <None Include="wwwroot\profileImages\65c7c59eff9c41a190e1a76f67528f4cLogo.png" />
+    <None Include="wwwroot\profileImages\7893374babea4a8cabeba7988e219b4fLogo.png" />
+    <None Include="wwwroot\profileImages\7b02bd3039104a7fa77212b134a5aa2bLogo.png" />
+    <None Include="wwwroot\profileImages\8458e4340cbb40489a5b8db98d352422Logo.png" />
+    <None Include="wwwroot\profileImages\887bae81641b4e398e9e7738603b3e2cLogo.png" />
+    <None Include="wwwroot\profileImages\93edc400ef504836bc71b81b79012218Logo.png" />
+    <None Include="wwwroot\profileImages\9ab6a248e371427b923a370ad0b91039Logo.png" />
+    <None Include="wwwroot\profileImages\9b1d0c0fadb64342b30c7b7ec0c50e56Logo.png" />
+    <None Include="wwwroot\profileImages\9da76dff33a446b1b34ef5045fba09deLogo.png" />
+    <None Include="wwwroot\profileImages\9f1992b9302f43c7831d20e26685ae36Logo.png" />
+    <None Include="wwwroot\profileImages\9f7260689e7f4829a65d945846dd2c98Logo.png" />
+    <None Include="wwwroot\profileImages\a4790071728e4cd9b5d223e7bcac7f2fLogo.png" />
+    <None Include="wwwroot\profileImages\b1005c7532a64526adc9e679b4932429Logo.png" />
+    <None Include="wwwroot\profileImages\b187b479fec9499f8ef0e88dcc3fc033Logo.png" />
+    <None Include="wwwroot\profileImages\b7bacf9492694af89a5ce202a5865ba3Logo.png" />
+    <None Include="wwwroot\profileImages\c3c78ef1a14a42428145a182c7629c36Logo.png" />
+    <None Include="wwwroot\profileImages\cafc7b714e3b4b68b0d1f0b4b58a54c4Logo.png" />
+    <None Include="wwwroot\profileImages\cecd56e078ab40a89049905b775fdc4dLogo.png" />
+    <None Include="wwwroot\profileImages\d11e04fe6b74408496a977a169a06069Logo.png" />
+    <None Include="wwwroot\profileImages\f9b46c251add4bdc94608bd94d44c644Logo.png" />
+    <None Include="wwwroot\profileImages\fdb92910f95940dbb001abfffcd7a2ceLogo.png" />
+    <None Include="wwwroot\profileImages\ffc1419eb592451abf3b15ae363d7d8cLogo.png" />
+  </ItemGroup>
+
 </Project>

@@ -14,6 +14,7 @@ namespace Aqary.DTO.Dtos.BaseEntity
         public bool Status { get; set; }
         public double Salary { get; set; }
         public double PriceInDinar { get; set; }
+        public DateTime CreatedAt { get; set; }
         public int IdUser { get; set; }
         public int IdCategory { get; set; }
     }
