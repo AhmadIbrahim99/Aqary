@@ -18,6 +18,8 @@ namespace Aqary.DataAccessLayer.Models
         public string PasswordHash { get; set; }
         public string Email { get; set; }
         public string ImageString { get; set; } = string.Empty;
+        //public int AddressId { get; set; }
+        //public Address Address { get; set; }
         public virtual ICollection<Estate> Estates { get; set; }
     }
 }

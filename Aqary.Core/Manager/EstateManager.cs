@@ -21,13 +21,16 @@ namespace Aqary.Core.Manager
         BaseManager<Estate, CreateEstateDto, UpdateEstateDto, Estate>
         , IEstateManager
     {
+        private readonly IAddressManager _address;
         private readonly AqaryDataBaseContext _context;
         private readonly IMapper _mapper;
         public EstateManager(AqaryDataBaseContext context,
-            IMapper mapper) : base(context, mapper)
+            IMapper mapper,
+            IAddressManager address) : base(context, mapper)
         {
             _context = context;
             _mapper = mapper;
+            _address = address;
         }
         public ResponseEstateDto GetAllFilterAsync(int page = 1, int pageSize = 10, string searchText = "", string sortColumn = "", string sortDirection = "ascending")
         {
@@ -71,6 +74,7 @@ namespace Aqary.Core.Manager
 
         public override async Task<Estate> CeateAsync(CreateEstateDto entity)
         {
+            //_address.CeateAsync();
             var result = await base.CeateAsync(entity);
             if (entity.AttachmentsString != null)
             {

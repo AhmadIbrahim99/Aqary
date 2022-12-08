@@ -18,11 +18,13 @@ namespace Aqary.DataAccessLayer.Models
         public bool Status { get; set; }
         public double Salary { get; set; }
         public double PriceInDinar { get; set; }
+        //public int AddressId { get; set; }
         public int IdUser { get; set; }
         public int IdCategory { get; set; }
 
         public virtual Category IdCategoryNavigation { get; set; }
         public virtual ApplicationUser IdUserNavigation { get; set; }
         public virtual ICollection<Attachment> Attachments { get; set; }
+        //public Address Address { get; set; }
     }
 }

@@ -18,12 +18,36 @@ namespace Aqary.DataAccessLayer.Models
         public virtual DbSet<Attachment> Attachments { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Estate> Estates { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+            modelBuilder.Entity<Address>(entity =>
+            {
+                entity.ToTable("AqaryAddress");
+                entity.Property(e => e.CreatedAt)
+                    .HasPrecision(0)
+                    .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.FirstAddress)
+                    .IsRequired()
+                    //.HasDefaultValue("") = string.Empty;
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SecoundAddress)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Latitude);
+                entity.Property(e => e.Longitude);
+
+                entity.Property(e => e.DeletedAt).HasPrecision(0);
+                entity.Property(e => e.UpdatedAt).HasPrecision(0);
+
+            });
             modelBuilder.Entity<ApplicationUser>(entity =>
             {
                 entity.ToTable("ApplicationUser");
@@ -147,6 +171,7 @@ namespace Aqary.DataAccessLayer.Models
             modelBuilder.Entity<Estate>().HasQueryFilter(x => x.DeletedAt == null || IgnoreFilter);
             modelBuilder.Entity<Attachment>().HasQueryFilter(x => x.DeletedAt == null || IgnoreFilter);
             modelBuilder.Entity<Category>().HasQueryFilter(x => x.DeletedAt == null || IgnoreFilter);
+            modelBuilder.Entity<Address>().HasQueryFilter(x => x.DeletedAt == null || IgnoreFilter);
             OnModelCreatingPartial(modelBuilder);
         }
 
