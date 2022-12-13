@@ -1,0 +1,31 @@
+<div *ngIf="spinner" class="spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div *ngIf="!spinner" class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <mdb-carousel [controls]="true" [dark]="true" [animation]="'fade'">
+        <mdb-carousel-item *ngFor="let currentImage of current.attachments">
+          <img
+            [src]="currentImage.imageString"
+            class="img-fluid rounded-start"
+            alt="..."
+          />
+        </mdb-carousel-item>
+      </mdb-carousel>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ current.name }}</h5>
+        <p class="card-text">{{ current.description }}</p>
+        <p class="card-text">
+          <small class="text-muted"
+            ><time [dateTime]="current.createdAt">{{
+              current.createdAt
+            }}</time></small
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
