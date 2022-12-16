@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div *ngIf="spinner" class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div *ngIf="!spinner" class="col-md-6 border">
+      <form [formGroup]="createEstateForm" (ngSubmit)="onSubmit()">
+        <!-- Text input -->
+        <div class="form-outline mb-4 mt-2">
+          <input
+            formControlName="name"
+            type="text"
+            class="form-label"
+            class="form-control border"
+          />
+          <label class="form-label" for="form6Example2">Name</label>
+        </div>
+
+        <!-- Text input -->
+        <div class="form-outline mb-4">
+          <label for="typeEstate">Type Estate</label>
+          <select formControlName="typeEstate" class="form-control border">
+            <option
+              *ngFor="let current of typeEstate.typeEstate"
+              [value]="current.value"
+            >
+              {{ current.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- priceInDinar input -->
+        <div class="form-outline mb-4">
+          <input
+            formControlName="priceInDinar"
+            type="number"
+            id="form6Example5"
+            class="form-control border"
+          />
+          <label class="form-label" for="form6Example5">Price In Dinar</label>
+        </div>
+
+        <!-- salary input -->
+        <div class="form-outline mb-4">
+          <input
+            formControlName="salary"
+            type="number"
+            id="form6Example10"
+            class="form-control border"
+          />
+          <label class="form-label" for="form6Example10">Price In Dinar</label>
+        </div>
+
+        <!-- Select -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form6Example6">Category</label>
+          <select
+            formControlName="idCategory"
+            name="category"
+            id="form6Example6"
+            class="form-control border"
+          >
+            <option *ngFor="let cat of categories" [value]="cat.id">
+              {{ cat.name }}
+            </option>
+          </select>
+        </div>
+        <!-- File input -->
+        <div class="form-outline mb-4">
+          <input
+            formControlName="images"
+            (change)="onSelectidImages($event)"
+            type="file"
+            multiple
+            accept="image/*"
+            class="form-control border"
+          />
+        </div>
+        <!-- Message input -->
+        <div class="form-outline mb-4">
+          <textarea
+            formControlName="description"
+            class="form-control border"
+            id="form6Example7"
+            rows="4"
+          ></textarea>
+          <label class="form-label" for="form6Example7">Description</label>
+        </div>
+
+        <!-- Checkbox -->
+        <div class="form-check d-flex justify-content-center mb-4">
+          <input
+            formControlName="status"
+            class="form-check-input me-2 border"
+            type="checkbox"
+            value=""
+            id="form6Example8"
+            checked
+          />
+          <label class="form-check-label" for="form6Example8"> For Sale </label>
+        </div>
+
+        <!-- Submit button -->
+        <button
+          [disabled]="!createEstateForm.valid"
+          type="submit"
+          class="btn btn-primary btn-block mb-4"
+        >
+          Create Estate
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

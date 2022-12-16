@@ -1,0 +1,71 @@
+<!-- new Date(this.Model.createdAt) -->
+<div class="container">
+  <div *ngIf="spinner" class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div *ngIf="!spinner" class="row justify-content-center mb-2">
+    <div class="col-6 mb-3">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <select 
+        formControlName="sortable"
+        class="form-select mb-1">
+          <option *ngFor="let current of sortable" [value]="current.key">
+            {{ current.value }}
+          </option>
+        </select>
+        <div class="form-check d-flex justify-content-center mb-1">
+          <input
+          formControlName="ascending"
+            class="form-check-input me-2 border"
+            type="checkbox"
+            id="ascending"
+            checked
+          />
+          <label class="form-check-label" for="ascending"> Ascending </label>
+        </div>
+        <div class="input-group">
+          <button class="btn btn-primary" type="submit">Search</button>
+          <input placeholder="Search" formControlName="search" class="form-control" type="search" />
+        </div>
+      </form>
+    </div>
+    <hr />
+  </div>
+  <div *ngIf="!spinner" class="row row-cols-1 row-cols-md-3 g-4">
+    <div *ngFor="let currentModel of data" class="col">
+      <div class="card h-100">
+        <mdb-carousel [controls]="true" [dark]="true" [animation]="'fade'">
+          <mdb-carousel-item
+            *ngFor="let currentImage of currentModel.attachments"
+          >
+            <img
+              [src]="currentImage.imageString"
+              class="d-block w-100"
+              alt="..."
+            />
+          </mdb-carousel-item>
+        </mdb-carousel>
+        <div class="card-body">
+          <h5 class="card-title">{{ currentModel.name }}</h5>
+          <p class="card-text">{{ currentModel.description }}</p>
+          <a [routerLink]="['/estate', currentModel.id]" class="btn btn-primary"
+            >Go to details</a
+          >
+          <button
+            type="button"
+            (confirm)="deleteEstate(currentModel.id)"
+            [swal]="['Oops!', 'Are u Sure to Delete This :/', 'warning']"
+            class="ms-1 btn btn-danger"
+          >
+            Delete
+          </button>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{
+            getDate(currentModel.createdAt) | date
+          }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
